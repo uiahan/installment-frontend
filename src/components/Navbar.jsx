@@ -1,17 +1,34 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     const confirmLogout = window.confirm("Yakin ingin logout?");
     if (!confirmLogout) return;
 
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    try {
+      const token = localStorage.getItem("token");
 
-    navigate("/");
-  }
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      localStorage.removeItem("token");
+
+      navigate("/")
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Gagal logout dari server!");
+    }
+  };
 
   return (
     <div className="navbar bg-base-300 shadow-sm px-40">
@@ -24,7 +41,7 @@ function Navbar() {
             <a>Link</a>
           </li> */}
           <li>
-            <button onClick={handleLogout} className="btn btn-warning">Logout</button>
+            <button onClick={handleLogout} className="btn btn-primary rounded-lg">Logout</button>
           </li>
         </ul>
       </div>
