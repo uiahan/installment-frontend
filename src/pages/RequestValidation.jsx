@@ -40,7 +40,6 @@ const RequestValidation = () => {
       alert("Request data validation send successfully!");
       navigate("/dashboard");
     } catch (err) {
-      console.err(err);
       alert(err.response?.data?.message || "Gagal mengirim data");
     } finally {
       setLoading(false);

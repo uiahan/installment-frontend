@@ -4,6 +4,8 @@ import Dashboard from "../pages/Dashboard";
 import DashboardLayout from "../layout/DashboardLayout";
 import RequestValidation from "../pages/RequestValidation";
 import ProtectedRoute from "./ProtectedRoute";
+import ListCars from "../pages/ListCars";
+import AddInstallmentCars from "../pages/AddInstallmentCars";
 
 function AppRoute() {
   return (
@@ -14,6 +16,8 @@ function AppRoute() {
       </ProtectedRoute>}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/request-validation" element={<RequestValidation />} />
+        <Route path="/list-cars" element={<ListCars />} />
+        <Route path="/installment/:id" element={<AddInstallmentCars />} />
       </Route>
     </Routes>
   );

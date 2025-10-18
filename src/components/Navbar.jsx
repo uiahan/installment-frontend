@@ -10,7 +10,7 @@ function Navbar() {
 
     try {
       const token = localStorage.getItem("token");
-
+  
       await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/logout`,
         {},
